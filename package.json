@@ -1,14 +1,14 @@
 {
   "name": "task-management-system",
   "version": "1.0.0",
+  "license": "ISC",
+  "author": "Yasir Khan",
   "description": "Design a RESTful API for a simple task management system. Users can create tasks, assign them to other users, mark tasks as complete, and categorize tasks.",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc -p .",
     "start": "node dist/src/index.js"
   },
-  "author": "Yasir Khan",
-  "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.1.1",
     "bcryptjs": "^2.4.3",
