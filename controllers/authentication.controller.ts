@@ -166,7 +166,7 @@ export namespace AuthenticationController {
       res.cookie('accessToken', accessToken, { httpOnly: true })
       res.cookie('refreshToken', refreshToken, { httpOnly: true })
 
-      res.status(200).json({ message: 'Access and refresh tokens stored in cookies' })
+      res.status(200).json({accessToken, refreshToken })
     } catch (error) {
       next(error)
     }

@@ -1,6 +1,7 @@
 import request from 'supertest'
 import app from '../src/index'
 
+import { AUTH_PATH } from './authentication.route'
 import { TASK_MANAGEMENT_PATH } from './task.route'
 
 import { PrismaClient } from '@prisma/client';
@@ -21,6 +22,7 @@ describe('TaskManagerController', () => {
         "email_verify_code": "123456",
       }
     });
+
     await prisma.task.create({
       data: {
         "user_id": user.user_id,
@@ -40,6 +42,7 @@ describe('TaskManagerController', () => {
   it('should be greater than 0', async () => {
     const response = await request(app)
       .get(`${TASK_MANAGEMENT_PATH}/tasks`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .expect(200);
 
     expect(response.body.length).toBeGreaterThan(0);
@@ -49,6 +52,7 @@ describe('TaskManagerController', () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
       .get(`${TASK_MANAGEMENT_PATH}/task/${task?.task_id}`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .expect(200);
 
     expect(response.body.task_id).toEqual(task?.task_id);
@@ -58,6 +62,7 @@ describe('TaskManagerController', () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
       .get(`${TASK_MANAGEMENT_PATH}/tasks-by-user?user_id=${task?.user_id}`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .expect(200);
 
     expect(response.body.length).toBeGreaterThan(0);
@@ -67,6 +72,7 @@ describe('TaskManagerController', () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
       .get(`${TASK_MANAGEMENT_PATH}/tasks-by-category?category=${task?.category}`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .expect(200);
 
     expect(response.body.length).toBeGreaterThan(0);
@@ -76,6 +82,7 @@ describe('TaskManagerController', () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
       .put(`${TASK_MANAGEMENT_PATH}/task/${task?.task_id}`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .send({
         "user_id": task?.user_id,
         "title": "updated title",
@@ -93,6 +100,7 @@ describe('TaskManagerController', () => {
     const user = await prisma.user.findFirst();
     const response = await request(app)
       .post(`${TASK_MANAGEMENT_PATH}/task`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .send({
         "user_id": user?.user_id,
         "title": "title",
@@ -110,6 +118,7 @@ describe('TaskManagerController', () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
       .delete(`${TASK_MANAGEMENT_PATH}/task/${task?.task_id}`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .expect(200);
 
     expect(response.body.task_id).toEqual(task?.task_id);
@@ -119,6 +128,7 @@ describe('TaskManagerController', () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
       .delete(`${TASK_MANAGEMENT_PATH}/delete-task/${task?.task_id}`)
+      .set('Authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .expect(200);
 
     expect(response.body.task_id).toEqual(task?.task_id);
