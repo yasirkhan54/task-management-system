@@ -57,7 +57,7 @@ describe('TaskManagerController', () => {
   it('should get by assigned to', async () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
-      .get(`${TASK_MANAGEMENT_PATH}/tasks?assignedTo=${task?.user_id}`)
+      .get(`${TASK_MANAGEMENT_PATH}/tasks-by-user?user_id=${task?.user_id}`)
       .expect(200);
 
     expect(response.body.length).toBeGreaterThan(0);
@@ -66,7 +66,7 @@ describe('TaskManagerController', () => {
   it('should get by category', async () => {
     const task = await prisma.task.findFirst();
     const response = await request(app)
-      .get(`${TASK_MANAGEMENT_PATH}/tasks?category=${task?.category}`)
+      .get(`${TASK_MANAGEMENT_PATH}/tasks-by-category?category=${task?.category}`)
       .expect(200);
 
     expect(response.body.length).toBeGreaterThan(0);
