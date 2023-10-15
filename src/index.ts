@@ -3,6 +3,9 @@ import createHttpError, { HttpError } from 'http-errors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
+import { ERROR_MESSAGE } from '../constants'
+import { MODULES_LIST } from '../routes'
+
 // Express port configuration
 const PORT_NUMBER = process.env.PORT || 3000;
 
@@ -24,9 +27,12 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Service is up!');
 })
 
+// Load modules: authentication, task, etc.
+MODULES_LIST.forEach((module) => app.use(module.PATH, module.ROUTER))
+
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createHttpError[404]('URL not found'))
+  next(createHttpError[404](ERROR_MESSAGE.INVALID_RESOURCE_URL))
 })
 
 // error handler
