@@ -10,10 +10,15 @@ const router = Router()
 const PATH = {
   GET_ALL_TASKS: '/tasks',
   GET_TASK_BY_ID: '/task/:task_id',
-  GET_TASKS_BY_ASSIGNED_TO: '/tasks?assignedTo=:task_id',
-  GET_TASKS_BY_CATEGORY: '/tasks?category=:category',
+  
+  GET_TASKS_BY_CATEGORY: '/tasks-by-category',
+  GET_TASKS_BY_ASSIGNED_TO: '/tasks-by-user',
+  GET_ALL_TASKS_PAGINATED: '/search',
+
   UPDATE_TASK_BY_ID: '/task/:task_id',
+
   CREATE_TASK: '/task',
+  
   DELETE_TASK_BY_ID: '/task/:task_id',
   SOFT_DELETE_TASK_BY_ID: '/delete-task/:task_id'
 }
@@ -21,8 +26,10 @@ const PATH = {
 // POST APIs
 router.get(PATH.GET_ALL_TASKS, TaskManagerController.GET_ALL_TASKS)
 router.get(PATH.GET_TASK_BY_ID, TaskManagerController.GET_TASK_BY_ID)
-router.get(PATH.GET_TASKS_BY_ASSIGNED_TO, TaskManagerController.GET_TASKS_BY_ASSIGNED_TO)
+
 router.get(PATH.GET_TASKS_BY_CATEGORY, TaskManagerController.GET_TASKS_BY_CATEGORY)
+router.get(PATH.GET_TASKS_BY_ASSIGNED_TO, TaskManagerController.GET_TASKS_BY_ASSIGNED_TO)
+router.get(PATH.GET_ALL_TASKS_PAGINATED, TaskManagerController.GET_ALL_TASKS_PAGINATED)
 
 router.put(PATH.UPDATE_TASK_BY_ID, validate(TaskDto), TaskManagerController.UPDATE_TASK_BY_ID)
 

@@ -49,3 +49,5 @@ app.use(function (err: HttpError, req: Request, res: Response, next: NextFunctio
 
 // Start server
 app.listen(PORT_NUMBER, () => { console.log(`Server running on port ${PORT_NUMBER}`); }); 
+
+export default app;

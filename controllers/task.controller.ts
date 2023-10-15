@@ -18,6 +18,23 @@ export namespace TaskManagerController {
     }
   }
 
+  // Get all tasks paginated data.
+  export const GET_ALL_TASKS_PAGINATED = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { page, limit } = req.query as { page: string, limit: string }
+      const page_limit = parseInt(limit || '5')
+      const page_number = parseInt(page || '1')
+
+      const tasks = await db.task.findMany({
+        skip: (page_number - 1) * page_limit,
+        take: page_limit,
+      })
+      res.status(200).json(tasks)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   // Get a task by its ID.
   export const GET_TASK_BY_ID = async (req: Request, res: Response, next: NextFunction) => {
     try {
