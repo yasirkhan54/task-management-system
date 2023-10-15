@@ -1,0 +1,7 @@
+import { AUTH_PATH, AUTH_ROUTER } from './authentication.route'
+import { TASK_MANAGEMENT_PATH, TASK_MANAGEMENT_ROUTER } from './task.route'
+
+export const MODULES_LIST = [
+  { PATH: AUTH_PATH, ROUTER: AUTH_ROUTER },
+  { PATH: TASK_MANAGEMENT_PATH, ROUTER: TASK_MANAGEMENT_ROUTER }
+]

@@ -18,4 +18,7 @@ export const ERROR_MESSAGE = {
   EMAIL_ALREADY_VERIFIED: 'Email already verified.',
   USER_NOT_ACTIVE: 'User is not active, please contact with support.',
   USER_DELETED: 'User is deleted, please contact with support.',
+
+  TASK_NOT_FOUND: 'Task not found.',
+  CATEGORY_NOT_FOUND: 'Category not found.',
 }

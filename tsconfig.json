@@ -9,7 +9,17 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+
+    // "declaration": false,
+    // "removeComments": true,
+    // "strictNullChecks": true,
+    // "emitDecoratorMetadata": true,
+    // "allowSyntheticDefaultImports": true,
+    // "sourceMap": true,
+    // "baseUrl": "./",
+    // "incremental": true,
+    // "skipLibCheck": true,
   },
   "include": ["/**/*"],
 }
